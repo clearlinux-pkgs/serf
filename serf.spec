@@ -16,7 +16,7 @@ BuildRequires : apr-util-dev
 BuildRequires : expat-dev
 BuildRequires : pkgconfig(openssl)
 BuildRequires : pkgconfig(zlib)
-BuildRequires : python-dev
+
 BuildRequires : scons
 BuildRequires : util-linux-dev
 BuildRequires : zlib-dev
