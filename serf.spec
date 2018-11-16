@@ -4,7 +4,7 @@
 #
 Name     : serf
 Version  : 1.3.9
-Release  : 4
+Release  : 5
 URL      : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source0  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Summary  : HTTP client library
