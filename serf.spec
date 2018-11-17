@@ -4,20 +4,21 @@
 #
 Name     : serf
 Version  : 1.3.9
-Release  : 5
+Release  : 6
 URL      : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source0  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Summary  : HTTP client library
 Group    : Development/Tools
 License  : Apache-2.0
-Requires: serf-lib
+Requires: serf-lib = %{version}-%{release}
+Requires: serf-license = %{version}-%{release}
 BuildRequires : apr-dev
 BuildRequires : apr-util-dev
+BuildRequires : buildreq-scons
 BuildRequires : expat-dev
 BuildRequires : pkgconfig(openssl)
 BuildRequires : pkgconfig(zlib)
-
-BuildRequires : scons
+BuildRequires : python-core
 BuildRequires : util-linux-dev
 BuildRequires : zlib-dev
 Patch1: sconscript-python3.patch
@@ -32,8 +33,8 @@ kept to a minimum to provide high performance operation.
 %package dev
 Summary: dev components for the serf package.
 Group: Development
-Requires: serf-lib
-Provides: serf-devel
+Requires: serf-lib = %{version}-%{release}
+Provides: serf-devel = %{version}-%{release}
 
 %description dev
 dev components for the serf package.
@@ -42,9 +43,18 @@ dev components for the serf package.
 %package lib
 Summary: lib components for the serf package.
 Group: Libraries
+Requires: serf-license = %{version}-%{release}
 
 %description lib
 lib components for the serf package.
+
+
+%package license
+Summary: license components for the serf package.
+Group: Default
+
+%description license
+license components for the serf package.
 
 
 %prep
@@ -60,6 +70,9 @@ scons %{?_smp_mflags}  PREFIX=/usr LIBDIR=/usr/lib64
 
 %install
 scons install --install-sandbox=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/serf
+cp LICENSE %{buildroot}/usr/share/package-licenses/serf/LICENSE
+cp NOTICE %{buildroot}/usr/share/package-licenses/serf/NOTICE
 
 %files
 %defattr(-,root,root,-)
@@ -77,3 +90,8 @@ scons install --install-sandbox=%{buildroot}
 %defattr(-,root,root,-)
 /usr/lib64/libserf-1.so.1
 /usr/lib64/libserf-1.so.1.3.0
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/serf/LICENSE
+/usr/share/package-licenses/serf/NOTICE
