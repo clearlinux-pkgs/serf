@@ -1,6 +1,5 @@
 1.3.9
 expat-dev
 pkgconfig(zlib)
-python-core
 util-linux-dev
 zlib-dev

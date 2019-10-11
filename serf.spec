@@ -4,7 +4,7 @@
 #
 Name     : serf
 Version  : 1.3.9
-Release  : 8
+Release  : 9
 URL      : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source0  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Summary  : HTTP client library
@@ -18,7 +18,6 @@ BuildRequires : buildreq-scons
 BuildRequires : expat-dev
 BuildRequires : pkgconfig(openssl)
 BuildRequires : pkgconfig(zlib)
-BuildRequires : python-core
 BuildRequires : util-linux-dev
 BuildRequires : zlib-dev
 Patch1: sconscript-python3.patch
@@ -35,6 +34,7 @@ Summary: dev components for the serf package.
 Group: Development
 Requires: serf-lib = %{version}-%{release}
 Provides: serf-devel = %{version}-%{release}
+Requires: serf = %{version}-%{release}
 
 %description dev
 dev components for the serf package.
@@ -57,6 +57,15 @@ Group: Default
 license components for the serf package.
 
 
+%package staticdev
+Summary: staticdev components for the serf package.
+Group: Default
+Requires: serf-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the serf package.
+
+
 %prep
 %setup -q -n serf-1.3.9
 %patch1 -p1
@@ -65,14 +74,19 @@ license components for the serf package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 scons %{?_smp_mflags}  PREFIX=/usr LIBDIR=/usr/lib64
 
 %install
 scons install --install-sandbox=%{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/serf
-cp LICENSE %{buildroot}/usr/share/package-licenses/serf/LICENSE
-cp NOTICE %{buildroot}/usr/share/package-licenses/serf/NOTICE
+cp %{_builddir}/serf-1.3.9/LICENSE %{buildroot}/usr/share/package-licenses/serf/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
+cp %{_builddir}/serf-1.3.9/NOTICE %{buildroot}/usr/share/package-licenses/serf/17499e4ea127286a863710db5d60e1916f5fa651
 
 %files
 %defattr(-,root,root,-)
@@ -82,7 +96,6 @@ cp NOTICE %{buildroot}/usr/share/package-licenses/serf/NOTICE
 /usr/include/serf-1/serf.h
 /usr/include/serf-1/serf_bucket_types.h
 /usr/include/serf-1/serf_bucket_util.h
-/usr/lib64/*.a
 /usr/lib64/libserf-1.so
 /usr/lib64/pkgconfig/serf-1.pc
 
@@ -93,5 +106,9 @@ cp NOTICE %{buildroot}/usr/share/package-licenses/serf/NOTICE
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/serf/LICENSE
-/usr/share/package-licenses/serf/NOTICE
+/usr/share/package-licenses/serf/17499e4ea127286a863710db5d60e1916f5fa651
+/usr/share/package-licenses/serf/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/libserf-1.a
