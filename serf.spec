@@ -6,7 +6,7 @@
 #
 Name     : serf
 Version  : 1.3.9
-Release  : 11
+Release  : 12
 URL      : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source0  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source1  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2.asc
