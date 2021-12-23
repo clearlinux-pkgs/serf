@@ -6,7 +6,7 @@
 #
 Name     : serf
 Version  : 1.3.9
-Release  : 13
+Release  : 14
 URL      : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source0  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source1  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2.asc
@@ -18,11 +18,8 @@ Requires: serf-license = %{version}-%{release}
 BuildRequires : apr-dev
 BuildRequires : apr-util-dev
 BuildRequires : buildreq-scons
-BuildRequires : expat-dev
 BuildRequires : pkgconfig(openssl)
 BuildRequires : pkgconfig(zlib)
-BuildRequires : util-linux-dev
-BuildRequires : zlib-dev
 Patch1: sconscript-python3.patch
 
 %description

@@ -1,5 +1,2 @@
 1.3.9
-expat-dev
 pkgconfig(zlib)
-util-linux-dev
-zlib-dev
