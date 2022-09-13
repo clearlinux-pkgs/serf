@@ -6,7 +6,7 @@
 #
 Name     : serf
 Version  : 1.3.9
-Release  : 16
+Release  : 17
 URL      : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source0  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source1  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2.asc
@@ -21,6 +21,7 @@ BuildRequires : buildreq-scons
 BuildRequires : pkgconfig(openssl)
 BuildRequires : pkgconfig(zlib)
 Patch1: sconscript-python3.patch
+Patch2: backport-build.patch
 
 %description
 Welcome to Apache Serf, a high-performance asynchronous HTTP client library.
@@ -70,6 +71,7 @@ staticdev components for the serf package.
 %setup -q -n serf-1.3.9
 cd %{_builddir}/serf-1.3.9
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
