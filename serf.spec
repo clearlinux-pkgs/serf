@@ -6,7 +6,7 @@
 #
 Name     : serf
 Version  : 1.3.9
-Release  : 15
+Release  : 16
 URL      : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source0  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2
 Source1  : https://www.apache.org/dist/serf/serf-1.3.9.tar.bz2.asc
@@ -86,8 +86,8 @@ scons %{?_smp_mflags}  PREFIX=/usr LIBDIR=/usr/lib64
 %install
 scons install --install-sandbox=%{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/serf
-cp %{_builddir}/serf-1.3.9/LICENSE %{buildroot}/usr/share/package-licenses/serf/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
-cp %{_builddir}/serf-1.3.9/NOTICE %{buildroot}/usr/share/package-licenses/serf/17499e4ea127286a863710db5d60e1916f5fa651
+cp %{_builddir}/serf-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/serf/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
+cp %{_builddir}/serf-%{version}/NOTICE %{buildroot}/usr/share/package-licenses/serf/17499e4ea127286a863710db5d60e1916f5fa651 || :
 
 %files
 %defattr(-,root,root,-)
